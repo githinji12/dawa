@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(60, 4.8%, 95.9%);
+  --secondary-foreground: hsl(24, 9.8%, 10%);
+  --accent: hsl(60, 4.8%, 95.9%);
+  --accent-foreground: hsl(24, 9.8%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(20, 14.3%, 4.1%);
+  --radius: 0.5rem;
+  
+  /* Pharmacy-specific colors */
+  --medical-green: hsl(158, 64%, 52%);
+  --medical-green-foreground: hsl(0, 0%, 100%);
+  --success-green: hsl(142, 76%, 36%);
+  --success-green-foreground: hsl(0, 0%, 100%);
+  --warning-orange: hsl(43, 96%, 56%);
+  --warning-orange-foreground: hsl(0, 0%, 100%);
+  --danger-red: hsl(0, 72%, 51%);
+  --danger-red-foreground: hsl(0, 0%, 100%);
+  --light-bg: hsl(210, 40%, 98%);
+  --sidebar-bg: hsl(207, 90%, 54%);
+  --sidebar-secondary: hsl(158, 64%, 52%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    background-color: var(--light-bg);
+  }
+}
+
+@layer components {
+  .sidebar {
+    background: linear-gradient(135deg, var(--sidebar-bg), var(--sidebar-secondary));
+    min-height: 100vh;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  }
+
+  .sidebar-nav-link {
+    @apply text-white/80 rounded-lg mx-2 my-1 transition-all duration-300 hover:bg-white/20 hover:text-white hover:translate-x-1;
+  }
+
+  .sidebar-nav-link.active {
+    @apply bg-white/20 text-white;
+  }
+
+  .main-content {
+    @apply bg-white min-h-screen rounded-l-2xl shadow-lg;
+  }
+
+  .stat-card {
+    @apply bg-white rounded-xl shadow-md transition-transform duration-300 hover:-translate-y-1;
+  }
+
+  .drug-card {
+    @apply border border-gray-200 rounded-lg transition-all duration-300 hover:border-primary hover:shadow-md;
+  }
+
+  .drug-card:hover {
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+  }
+
+  .badge-expiry {
+    @apply bg-red-500 text-white px-2 py-1 rounded-full text-xs;
+  }
+
+  .badge-low-stock {
+    @apply bg-orange-500 text-white px-2 py-1 rounded-full text-xs;
+  }
+
+  .badge-in-stock {
+    @apply bg-green-500 text-white px-2 py-1 rounded-full text-xs;
+  }
+
+  .pos-interface {
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+    @apply rounded-2xl p-5;
+  }
+
+  .cart-item {
+    @apply bg-white rounded-lg border border-gray-200 mb-3 p-4;
+  }
+
+  .search-results {
+    @apply max-h-80 overflow-y-auto border border-gray-200 rounded-lg bg-white;
+  }
+
+  .search-result-item {
+    @apply p-3 border-b border-gray-100 cursor-pointer transition-colors hover:bg-gray-50;
+  }
+
+  .receipt-preview {
+    @apply bg-white border-2 border-dashed border-gray-300 rounded-lg p-5 font-mono;
+  }
+
+  .alert-indicator {
+    @apply relative;
+  }
+
+  .alert-indicator::after {
+    content: '';
+    @apply absolute -top-0.5 -right-0.5 w-2 h-2 bg-red-500 rounded-full animate-pulse;
+  }
+
+  .user-profile {
+    @apply bg-white/10 rounded-lg p-4 mb-5;
+  }
+
+  .logo-section {
+    @apply text-center p-5 border-b border-white/10 mb-5;
+  }
+
+  .medical-green {
+    background-color: var(--medical-green);
+    color: var(--medical-green-foreground);
+  }
+
+  .success-green {
+    background-color: var(--success-green);
+    color: var(--success-green-foreground);
+  }
+
+  .warning-orange {
+    background-color: var(--warning-orange);
+    color: var(--warning-orange-foreground);
+  }
+
+  .danger-red {
+    background-color: var(--danger-red);
+    color: var(--danger-red-foreground);
+  }
+}
+
+@media print {
+  .no-print { 
+    display: none !important; 
+  }
+  
+  .receipt-preview {
+    @apply border-none shadow-none;
+  }
+}
